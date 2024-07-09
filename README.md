@@ -92,7 +92,19 @@ The real estate website project is designed to allow the user to create advertis
 
 ##  `📈 UML Diagram` 
 
-//////////////
+![real-estate-uml-diagram](https://github.com/bertuginal/real-estate-final-project/assets/73167951/8d488562-b396-4a8b-b785-a82d253e7da8)
+
+≫ There are 6 microservices that communicate with each other. These microservices are managed by the gateway. Instance management is provided with service discovery.
+
+* Advert status changing is added to the queue by AdvertService and performed asynchronously by AdvertStatusService.
+* The package identification process is added to the queue by PurchaseService and performed asynchronously by UserService.
+
+&nbsp; 
+
+## 💱 API Structure
+/////////
+
+&nbsp; 
 
 ## 🌱 Contributing
 
