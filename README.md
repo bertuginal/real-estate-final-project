@@ -1,8 +1,6 @@
 <div align="center"><h1> :sparkles: REAL ESTATE FINAL PROJECT :sparkles: </h1></div>
 <div align="center"><h2> FMSS & Patika+ Fullstack Web Bootcamp </h2> </div>
 
-## ↓ Technology Stacks ↓
-
 ## ⚙️ BACK-END
 
 * [![Java][Java-logo]][Java-url]
@@ -67,7 +65,7 @@
 
 ❾ When the ad is created, the ad status is IN_REVIEW. The user can change the status of the ad to ACTIVE or PASSIVE from another service.
 
-✔️ See the [open issues](https://github.com/bertuginal/order-management-system/issues) for a full list of proposed features (and known issues)!
+✔️ See the [open issues](https://github.com/bertuginal/real-estate-final-project/issues) for a full list of proposed features (and known issues)!
 
 &nbsp; 
 
