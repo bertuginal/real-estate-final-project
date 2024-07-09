@@ -1,6 +1,14 @@
 <div align="center"><h1> :sparkles: REAL ESTATE FINAL PROJECT :sparkles: </h1></div>
 <div align="center"><h2> FMSS & Patika+ Fullstack Web Bootcamp </h2> </div>
 
+## ❓ What is this project?
+This project is a real estate website completion project developed as a full stack using Java, Spring Boot in the back-end and React and Next.js in the front-end.
+
+## 🔎 Overview
+
+
+
+
 ## ⚙️ BACK-END
 
 * [![Java][Java-logo]][Java-url]
