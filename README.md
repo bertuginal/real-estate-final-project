@@ -1,13 +1,26 @@
 <div align="center"><h1> :sparkles: REAL ESTATE FINAL PROJECT :sparkles: </h1></div>
-<div align="center"><h2> FMSS & Patika+ Fullstack Web Bootcamp </h2> </div>
+<div align="center"><h2> 🌐 FMSS & Patika+ Fullstack Web Bootcamp 🌐 </h2> </div>
 
 ## ❓ What is this project?
 This project is a real estate website completion project developed as a full stack using Java, Spring Boot in the back-end and React and Next.js in the front-end.
 
+&nbsp; 
+
 ## 🔎 Overview
 
+The real estate website project is designed to allow the user to create advertisements by communicating with each other through many microservices.
 
+* User can check balance and usage time by looking at profile details.
 
+* User can create, edit, delete advertisement and access its details.
+
+* The user can turn his ads, which are initially IN_REVIEW, into ACTIVE and PASSIVE.
+
+* Can make package purchases and payments.
+
+* Can view the details of the packages purchased.
+
+&nbsp; 
 
 ## ⚙️ BACK-END
 
@@ -76,6 +89,10 @@ This project is a real estate website completion project developed as a full sta
 ✔️ See the [open issues](https://github.com/bertuginal/real-estate-final-project/issues) for a full list of proposed features (and known issues)!
 
 &nbsp; 
+
+##  `📈 UML Diagram` 
+
+//////////////
 
 ## 🌱 Contributing
 
