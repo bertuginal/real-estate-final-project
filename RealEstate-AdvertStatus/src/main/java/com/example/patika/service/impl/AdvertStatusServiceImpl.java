@@ -25,7 +25,7 @@ public class AdvertStatusServiceImpl implements AdvertStatusService {
         this.advertClient = advertClient;
     }
 
-    //queue dan gelen ilan id ve status bilgisine göre ilan statüsü güncelleme
+    // Queue'dan gelen ilan id ve status bilgisine göre ilan statüsü güncelleme işlemi
     @Override
     public Result updateStatus(AdvertStatusRequest advertRequest) {
 
