@@ -17,7 +17,7 @@ public final class AuthController {
 
 	private final AuthService authService;
 
-	// kullanici mailine ve şifresine göre login
+	// Kullanıcı email ve password bilgisine göre token oluşturma ve login işlemi
 	@PostMapping(value = "/auth")
 	public ResponseEntity<AuthResponse> getToken(@RequestBody AuthRequest request) throws Exception {
 		return new ResponseEntity<>(authService.getToken(request), HttpStatus.OK);
