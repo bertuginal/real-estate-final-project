@@ -30,7 +30,7 @@ public class Purchase {
     private LocalDateTime purchaseDate = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "purchase_status") // ödemenin yapıldığını veya ücretin iade edilip edilmediğini belirtir
+    @Column(name = "purchase_status")
     private PurchaseStatus purchaseStatus;
 
 

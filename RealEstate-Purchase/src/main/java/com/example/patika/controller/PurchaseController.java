@@ -33,7 +33,7 @@ public class PurchaseController {
 
     @PostMapping("/purchases")
     public ResponseEntity<Result> purchase(@RequestBody PurchaseRequest purchaseRequest,@RequestHeader(value = "id") int userId) {
-        Result result = purchaseService.purchase(purchaseRequest,userId);
+        Result result = purchaseService.purchase(purchaseRequest, userId);
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
         }
@@ -42,7 +42,7 @@ public class PurchaseController {
 
     @PutMapping("/purchases/{id}")
     public ResponseEntity<Result> updatePurchaseStatusById(@PathVariable int id, @RequestBody PurchaseStatusRequest purchaseStatusRequest){
-        Result result = purchaseService.updatePurchaseStatusById(id,purchaseStatusRequest);
+        Result result = purchaseService.updatePurchaseStatusById(id, purchaseStatusRequest);
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
         }

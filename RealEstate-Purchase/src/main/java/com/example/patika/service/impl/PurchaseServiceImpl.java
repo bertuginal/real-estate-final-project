@@ -49,7 +49,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
 
-    // tüm satın almaları getirir
+    // Tüm satın almaların listelenmesi işlemi
     @Override
     public DataResult<List<PurchaseResponse>> findAll() {
         return new SuccessDataResult<List<PurchaseResponse>>(dtoConverterService.entityToDto(purchaseDao.findAll(), PurchaseResponse.class),
@@ -57,9 +57,16 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
 
-    // Login yapan kullanıcıya göre satın alma yapar.
-    // Kullanıcının kalan haklarını kontrol eder. Paketin süresi geçmişse kalan haklarını sıfırlar. ödemeyi bekler. Ödeme yapıldıysa, RabbitMq üzerinden user'a tanımlanır.
-    // Süresi geçmemişse sıfırlama yapmaz ödemeyi bekler. Ödeme yapıldıysa, RabbitMq üzerinden user'a tanımlanır.
+    /*
+    -> Sisteme login olan kullanıcıya göre satın alma yapılır.
+    -> Kullanıcının kalan haklarını kontrol eder.
+            * Eğer paketin süresi geçmişse;
+                    ** Kalan haklar sıfırlanır.
+                    ** Ödeme beklenir. Eğer ödeme yapıldıysa, RabbitMQ tarafından user'a paket tanımlanır.
+            * Eğer paketin süresi geçmemişse;
+                    ** Kalan haklar sıfırlanmaz.
+                    ** Ödeme beklenir. Eğer ödeme yapıldıysa, RabbitMQ tarafından user'a paket tanımlanır.
+     */
     @Override
     public Result purchase(PurchaseRequest purchaseRequest, int userId) {
         purchaseRequest.setUserId(userId);
@@ -86,7 +93,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
 
-    // iade durumu için update methodu
+    // Paket iadesi durumunda yapılan update işlemi
     @Override
     public Result updatePurchaseStatusById(int purchaseId, PurchaseStatusRequest purchaseStatusRequest) {
 
@@ -102,7 +109,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
 
-    // id ye göre satın alınan paketi getirir
+    // id'ye göre satın alınan paketin listelenmesi işlemi
     @Override
     public DataResult<PurchaseResponse> findById(int purchaseId) {
         if (purchaseDao.findById(purchaseId) == null) {
@@ -113,10 +120,10 @@ public class PurchaseServiceImpl implements PurchaseService {
                 "Purchase found!");
     }
 
-    //kullanıcı id sine göre satın alınan paketleri getirir
+    // Kullanıcı id'sine göre satın alınan paketlerin listelenmesi işlemi.
     @Override
     public DataResult<List<PurchaseResponse>> findAllByUserId(int userId) {
-        // Feign Exception  GlobalExceptionHandler tarafından handle ediliyor.
+        // Feign Exception, GlobalExceptionHandler tarafından handle ediliyor.
         userClient.findById(userId);
         return new SuccessDataResult<List<PurchaseResponse>>(dtoConverterService.entityToDto(purchaseDao.findAllByUserId(userId), PurchaseResponse.class),
                 "Active purchases have been listed by user id!");
@@ -130,9 +137,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     private UserBalanceIdentificationRequest prepareUserBalanceIdentificationRequest(AdvertPackage advertPackage, DataResult<IndividualUserResponse> response, PurchaseRequest purchaseRequest) {
         UserBalanceIdentificationRequest userBalanceIdentificationRequest = new UserBalanceIdentificationRequest();
-        userBalanceIdentificationRequest.setAdvertBalance(response.getData().getAdvertBalance() + advertPackage.getNumberOfAdvertRights()); // kullanıcının ilan hakkı ile pakketteki hak toplanır
-        userBalanceIdentificationRequest.setAdditionalDayEndDateOfPackage(advertPackage.getPackageValidityPeriod());// kullanıcının paket süresine eklenecek gün sayısı
-        userBalanceIdentificationRequest.setUserId(purchaseRequest.getUserId()); // kullanıcı id si tanımlandı
+        userBalanceIdentificationRequest.setAdvertBalance(response.getData().getAdvertBalance() + advertPackage.getNumberOfAdvertRights()); // Kullanıcının ilan hakkı ile pakketteki hak toplanır.
+        userBalanceIdentificationRequest.setAdditionalDayEndDateOfPackage(advertPackage.getPackageValidityPeriod());// Kullanıcının paket süresine eklenecek gün sayısı.
+        userBalanceIdentificationRequest.setUserId(purchaseRequest.getUserId()); // Kullanıcının id'si tanımlandı.
         return userBalanceIdentificationRequest;
     }
 }
