@@ -41,23 +41,30 @@ public class AdvertServiceImpl implements AdvertService {
     @Override
     public DataResult<List<AdvertResponse>> findAll() {
         return new SuccessDataResult<List<AdvertResponse>>(dtoConverterService.entityToDto(advertDao.findAll(), AdvertResponse.class),
-                "all adverts listed");
+                "All adverts have been listed!");
     }
 
-    //login yapan kullanıcının idsine göre ilan yayınlar
-    //kullanıcının kalan haklarını kontrol eder. Paketin süresi geçmişse kalan haklarını sıfırlar error result döner.
-    //süresi geçmemişse kalan hakları 0 ve 0 dan küçükse error result döner.
-    //süresi geçmemişse ve kalan hak varsa. İlan IN_REVIEW olarak oluşturulur.
+    /*
+
+    -> Sisteme login olan kullanıcının id'sine göre ilan yayınlama işlemidir.
+    -> Kullanıcının kalan hakları kontrol edilir.
+            * Eğer paketin süresi geçmişse;
+                    ** Kalan haklar sıfırlanır ve error response dönülür.
+            * Eğer paketin süresi geçmemişse;
+                    ** Kalan hak yoksa ve 0 dan küçükse error response dönülür.
+                    ** Kalan hak varsa ilanın statüsü IN_REVIEW olarak ayarlanır.
+     */
     @Override
     public Result add(AdvertRequest advertRequest,int id) {
         advertRequest.setUserId(id);
-        DataResult<UserBalanceResponse> response = userClient.findByIdForBalance(advertRequest.getUserId()); // Feign Exception  GlobalExceptionHandler tarafından handle ediliyor.  User bulunmazsa exception atıyor.
+        DataResult<UserBalanceResponse> response = userClient.findByIdForBalance(advertRequest.getUserId()); // Feign Exception, GlobalExceptionHandler tarafından handle ediliyor ve eğer "User" bulunmazsa exception atıyor.
         UserBalanceRequest userBalanceRequest = new UserBalanceRequest();
         if (response.getData().getEndDateOfPackage().isBefore(LocalDate.now()) || response.getData().getAdvertBalance() <= 0) {
 
-            userBalanceRequest.setAdvertBalance(0); // paketin kullanım süresi bittiği için balance sıfırlanır
+            userBalanceRequest.setAdvertBalance(0); // Paketin kullanım süresi bittiği için balance sıfırlanır.
             userBalanceRequest.setEndDateOfPackage(response.getData().getEndDateOfPackage());
-            userClient.updateBalanceById(advertRequest.getUserId(), userBalanceRequest); // Feign Exception  GlobalExceptionHandler tarafından handle ediliyor.
+            userClient.updateBalanceById(advertRequest.getUserId(), userBalanceRequest); // Feign Exception,  GlobalExceptionHandler tarafından handle ediliyor.
+
             return new ErrorResult("The advert couldn't be added because the package is undefined or expired or your balance is empty!");
         }
         userBalanceRequest.setAdvertBalance(response.getData().getAdvertBalance() - 1);
@@ -72,7 +79,7 @@ public class AdvertServiceImpl implements AdvertService {
         return new SuccessResult("Advert has been successfully added!");
     }
 
-    //id ye göre ilan güncelleme
+    // İlanın id'sine göre güncelleme işlemi
     @Override
     public Result updateById(int advertId, AdvertUpdateRequest advertUpdateRequest) {
 
@@ -89,7 +96,7 @@ public class AdvertServiceImpl implements AdvertService {
         return new SuccessResult("Advert has been successfully updated!");
     }
 
-    // id ye göre ilan silme
+    // İlanın id'sine göre silme işlemi
     @Override
     public Result deleteById(int advertId) {
         if (advertDao.findById(advertId) == null) {
@@ -100,7 +107,7 @@ public class AdvertServiceImpl implements AdvertService {
         return new SuccessResult("Advert has been successfully deleted!");
     }
 
-    // id ye göre ilan bulma
+    // İlanın id'sine göre listeleme işlemi
     @Override
     public DataResult<AdvertResponse> findById(int advertId) {
         if (advertDao.findById(advertId) == null) {
@@ -110,6 +117,7 @@ public class AdvertServiceImpl implements AdvertService {
                 "Advert has been found!");
     }
 
+    // Kullanıcının id'sine göre aktif olan ilanları listeleme işlemi
     @Override
     public DataResult<List<AdvertResponse>> findAllByUserIdAndIsActive(int userId) {
         // Feign Exception  GlobalExceptionHandler tarafından handle ediliyor. User bulunmazsa exception atıyor.
@@ -118,7 +126,7 @@ public class AdvertServiceImpl implements AdvertService {
                 "Active adverts have been listed by user id!");
     }
 
-    //kullanıcı id sine göre aktif ilanları getirme
+    // Kullanıcının id'sine göre pasif olan ilanları listeleme işlemi
     @Override
     public DataResult<List<AdvertResponse>> findAllByUserIdAndIsPassive(int userId) {
         // Feign Exception  GlobalExceptionHandler tarafından handle ediliyor. User bulunmazsa exception atıyor.
@@ -127,7 +135,7 @@ public class AdvertServiceImpl implements AdvertService {
                 "Passive adverts have been listed by user id!");
     }
 
-    //rabbitmq kullanarak(asenkron) idye göre ilan statüsünü aktif duruma getirme
+    // RabbitMQ kullanarak (asenkron olarak) ilanın id'sine göre ilan statüsünü aktif duruma getirme işlemi
     @Override
     public Result updateStatusActiveById(int advertId) {
         if (advertDao.findById(advertId) == null) {
@@ -140,7 +148,7 @@ public class AdvertServiceImpl implements AdvertService {
         return new SuccessResult("Status has been updated to active by id!");
     }
 
-    //rabbitmq kullanarak(asenkron) idye göre ilan statüsünü pasif duruma getirme
+    // RabbitMQ kullanarak (asenkron olarak) ilanın id'sine göre ilan statüsünü pasif duruma getirme işlemi
     @Override
     public Result updateStatusPassiveById(int advertId) {
 

@@ -24,6 +24,7 @@ public class AdvertController {
         this.advertService = advertService;
     }
 
+    // Tüm ilanların listelenmesi işlemi
     @GetMapping("/adverts")
     public ResponseEntity<DataResult<List<AdvertResponse>>> findAll() {
         DataResult<List<AdvertResponse>> result= advertService.findAll();
@@ -33,7 +34,7 @@ public class AdvertController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    //login yapan kullanıcının id sine göre ilan ekleme
+    // Login olan kullanıcının id'ye göre ilan ekleme işlemi
     @PostMapping("/adverts")
     public ResponseEntity<Result> add(@RequestBody AdvertRequest advertRequest,@RequestHeader(value = "id") int id) {
         Result result = advertService.add(advertRequest,id);
@@ -43,7 +44,7 @@ public class AdvertController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    //id ye göre ilan güncelleme
+    // İlanın id'sine göre güncelleme işlemi
     @PutMapping("/adverts/{id}")
     public ResponseEntity<Result> updateById(@PathVariable int id, @RequestBody AdvertUpdateRequest advertUpdateRequest){
         Result result = advertService.updateById(id,advertUpdateRequest);
@@ -53,7 +54,7 @@ public class AdvertController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    // id ye göre ilan silme
+    // İlanın id'sine göre silme işlemi
     @DeleteMapping("/adverts/{id}")
     public ResponseEntity<Result> deleteById(@PathVariable int id){
         Result result = advertService.deleteById(id);
@@ -63,7 +64,7 @@ public class AdvertController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    // id ye göre ilan bulma
+    // İlanın id'sine göre ilan listeleme işlemi
     @GetMapping("/adverts/{id}")
     public ResponseEntity<DataResult<AdvertResponse>> findById(@PathVariable int id) {
         DataResult<AdvertResponse> result = advertService.findById(id);
@@ -73,8 +74,7 @@ public class AdvertController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    //kullanıcı id sine göre aktif ilanları getirme
-
+    // Kullanıcının id'sine göre aktif ilanları listeleme işlemi
     @GetMapping("/adverts/actives/individual-user/{userId}")
     public ResponseEntity<DataResult<List<AdvertResponse>>> findAllByUserIdAndIsActive(  @PathVariable int userId) {
         DataResult<List<AdvertResponse>> result= advertService.findAllByUserIdAndIsActive(userId);
@@ -84,7 +84,7 @@ public class AdvertController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    //kullanıcı id sine göre pasif ilanları getirme
+    // Kullanıcının id'sine göre pasif ilanları listeleme işlemi
     @GetMapping("/adverts/passives/individual-user/{userId}")
     public ResponseEntity<DataResult<List<AdvertResponse>>> findAllByUserIdAndIsPassive( @PathVariable  int userId) {
 
@@ -95,7 +95,7 @@ public class AdvertController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    //idye göre ilan statüsünü aktif duruma getirme
+    // İlanın id'sine göre ilan statüsünü aktif duruma getirme işlemi
     @PutMapping("/adverts/update-status-active/{id}")
     public ResponseEntity<Result> updateStatusActiveById(@PathVariable int id){
         Result result = advertService.updateStatusActiveById(id);
@@ -105,7 +105,7 @@ public class AdvertController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    //idye göre ilan statüsünü pasif duruma getirme
+    // İlanın id'sine göre ilan statüsünü pasif duruma getirme işlemi
     @PutMapping("/adverts/update-status-passive/{id}")
     public ResponseEntity<Result> updateStatusPassiveById(@PathVariable int id){
         Result result = advertService.updateStatusPassiveById(id);
