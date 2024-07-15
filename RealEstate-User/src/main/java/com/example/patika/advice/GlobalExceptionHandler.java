@@ -16,16 +16,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(FeignException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleFeignException(FeignException feignException) {
-        log.error("feign client error || " + feignException.getMessage());
-        ErrorDataResult<Object> errorDataResult = new ErrorDataResult<Object>("feign client error");
+        log.error("Feign client error! || " + feignException.getMessage());
+        ErrorDataResult<Object> errorDataResult = new ErrorDataResult<Object>("Feign client error!");
         return errorDataResult;
     }
 
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleUserNotFoundException(UserNotFoundException userNotFoundException) {
-        log.error(" user not found error || " + userNotFoundException.getMessage());
-        ErrorDataResult<Object> errorDataResult = new ErrorDataResult<Object>("user not found");
+        log.error("User not found error! || " + userNotFoundException.getMessage());
+        ErrorDataResult<Object> errorDataResult = new ErrorDataResult<Object>("User not found!");
         return errorDataResult;
     }
 

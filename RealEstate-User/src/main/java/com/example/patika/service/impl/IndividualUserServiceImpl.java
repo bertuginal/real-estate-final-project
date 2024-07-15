@@ -40,7 +40,7 @@ public class IndividualUserServiceImpl implements IndividiualUserService {
 
     }
 
-    //user ekleme
+    // User oluşturma işlemi
     @Override
     public Result add(IndividualUserRequest individualUserRequest) {
 
@@ -49,7 +49,7 @@ public class IndividualUserServiceImpl implements IndividiualUserService {
         return new SuccessResult("User has been successfully added!");
     }
 
-    //id ye göre user güncelleme
+    // Kullanıcının id'sine göre user güncelleme işlemi
     @Override
     public Result updateById(int individualUserId, IndividualUserRequest individualUserRequest) {
 
@@ -66,7 +66,7 @@ public class IndividualUserServiceImpl implements IndividiualUserService {
         return new SuccessResult("User has been successfully updated!");
     }
 
-    //id ye göre user silme
+    // Kullanıcının id'sine göre user silme işlemi
     @Override
     public Result deleteById(int individualUserId) {
         if (individiualUserDao.findById(individualUserId) == null) {
@@ -77,7 +77,7 @@ public class IndividualUserServiceImpl implements IndividiualUserService {
         return new SuccessResult("User has been successfully deleted!");
     }
 
-    //id ye göre user bulma
+    // Kullanıcının id'sine göre user listeleme işlemi
     @Override
     public DataResult<IndividualUserResponse> findById(int individualUserId) {
 
@@ -88,7 +88,7 @@ public class IndividualUserServiceImpl implements IndividiualUserService {
                 "User has been found!");
     }
 
-    //id ye göre user bakiyesi güncelleme
+    // Kullanıcının id'sine göre user bakiyesi güncelleme işlemi
     @Override
     public Result updateBalanceById(int individualUserId, UserBalanceRequest userBalanceRequest) {
 
@@ -104,7 +104,7 @@ public class IndividualUserServiceImpl implements IndividiualUserService {
         return new SuccessResult("Balance has been successfully updated!");
     }
 
-    // id ye göre user bakiyesi güncelleme (rabbitMQ)
+    // Kullanıcının id'sine göre user bakiyesi güncelleme işlemi (rabbitMQ ile asenkron)
     @Override
     public Result updateBalanceByRabbitMq(int individualUserId, UserBalanceIdentificationRequest userBalanceIdentificationRequest) {
 
@@ -118,7 +118,7 @@ public class IndividualUserServiceImpl implements IndividiualUserService {
         return new SuccessResult("Balance has been successfully updated!");
     }
 
-    //id ye göre bakiye sorgulama
+    // Kullanıcının id'sine göre bakiye sorgulama işlemi
     @Override
     public DataResult<UserBalanceResponse> findByIdForBalance(int individualUserId) {
         if (individiualUserDao.findById(individualUserId) == null) {

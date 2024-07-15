@@ -26,7 +26,7 @@ public class IndividualUser extends User{
     private int advertBalance;
 
     @Column(name = "end_date_of_package")
-    private LocalDate endDateOfPackage = LocalDate.now().minusDays(1); // paket son kullanma tarihi oluşturulma tarihinden 1 gün öncesi olacak şekilde oluşur
+    private LocalDate endDateOfPackage = LocalDate.now().minusDays(1); // Paket son kullanma tarihi, oluşturulma tarihinden 1 gün öncesi olacak şekilde yapılır.
 
     public IndividualUser(int id, String email, String password, String photo, String phoneNumber, String firstName, String lastName) {
         super(id, email, password, photo, phoneNumber);
