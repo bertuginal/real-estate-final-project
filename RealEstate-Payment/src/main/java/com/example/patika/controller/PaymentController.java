@@ -25,19 +25,21 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    // ödeme servisi
-    @GetMapping("/payments")
-    public ResponseEntity<DataResult<List<PaymentResponse>>> findAll() {
-        DataResult<List<PaymentResponse>> result= paymentService.findAll();
+
+    // Ödeme yapma işlemi
+    @PostMapping("/payments")
+    public ResponseEntity<Result> pay(@RequestBody PaymentRequest paymentRequest) {
+        Result result = paymentService.pay(paymentRequest);
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
         }
         return ResponseEntity.badRequest().body(result);
     }
 
-    @PostMapping("/payments")
-    public ResponseEntity<Result> pay(@RequestBody PaymentRequest paymentRequest) {
-        Result result = paymentService.pay(paymentRequest);
+    // Ödeme detaylarının listelenmesi işlemi
+    @GetMapping("/payments")
+    public ResponseEntity<DataResult<List<PaymentResponse>>> findAll() {
+        DataResult<List<PaymentResponse>> result= paymentService.findAll();
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
         }

@@ -23,19 +23,19 @@ public class Payment {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "card_type")
-    private CardType cardType = CardType.VISA;
+    private CardType cardType = CardType.MASTERCARD;
 
     @Column(name = "card_number")
     private String cardNumber = "2555 5555 5555 5555";
 
     @Column(name = "card_holder_name")
-    private String cardHolderName = "YUNUS EMRE KOÇ";
+    private String cardHolderName = "BERTUĞ İNAL";
 
     @Column(name = "card_expiration_date")
-    private LocalDate cardExpirationDate = LocalDate.of(2022,11,19);
+    private LocalDate cardExpirationDate = LocalDate.of(2024,15,07);
 
     @Column(name = "card_cvv")
-    private String cardCvv = "645";
+    private String cardCvv = "225";
 
     @Column(name = "amount")
     private Double amount ;

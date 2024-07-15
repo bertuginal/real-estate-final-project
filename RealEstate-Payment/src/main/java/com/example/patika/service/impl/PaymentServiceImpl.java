@@ -38,7 +38,6 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Result pay(PaymentRequest paymentRequest) {
 
-        //purchase service de ödeme başarısız senaryosunu test etmek için.
         if(paymentRequest.getAmount()<0){
             throw new AmountTypeException("Amount type error!");
         }
