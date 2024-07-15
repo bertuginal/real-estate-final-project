@@ -30,7 +30,7 @@ public class JwtFilter implements GatewayFilter {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
         Mono<Principal> principal = exchange.getPrincipal();
-        log.info("principal: " + principal.toString());
+        log.info("Principal: " + principal.toString());
 
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
@@ -42,7 +42,7 @@ public class JwtFilter implements GatewayFilter {
         boolean isContainsAuth = headers.containsKey(AUTHORIZATION);
 
         if (!isContainsAuth) {
-            log.info("Header has not AUTHORIZATION");
+            log.info("Header has not AUTHORIZATION!");
             response.setStatusCode(HttpStatus.UNAUTHORIZED);
             return response.setComplete();
         }
@@ -50,7 +50,7 @@ public class JwtFilter implements GatewayFilter {
         List<String> headerList = headers.get(AUTHORIZATION);
         String token = headerList.get(0);
         if (token.isBlank()) {
-            log.info("Header has AUTHORIZATION but has not token");
+            log.info("Header has AUTHORIZATION but has not token!");
             response.setStatusCode(HttpStatus.UNAUTHORIZED);
             return response.setComplete();
         }
@@ -62,7 +62,7 @@ public class JwtFilter implements GatewayFilter {
         }
 
 
-        log.info("token is valid");
+        log.info("Token is valid!");
 
         Claims claims = jwtUtil.getAllClaimsFromToken(token);
         exchange.getRequest().mutate().header("id", String.valueOf(claims.get("id"))).build();

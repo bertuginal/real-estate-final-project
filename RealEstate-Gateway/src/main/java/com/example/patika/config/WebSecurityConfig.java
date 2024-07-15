@@ -33,34 +33,36 @@ public class WebSecurityConfig {
     public RouteLocator routes(RouteLocatorBuilder builder) {
         return builder.routes()
 
-
-                //login işlemi yapılmadan; kullanıcı oluşturulabilir, login işlemi yapılabilir. filtreden geçmez.
-
                 .route("realestate-user",
                         r -> r.method(HttpMethod.POST)
                                 .and()
                                 .path(("/individual-users/**"))
                                 .uri("lb://realestate-user"))
+
                 .route("realestate-auth",
                         r -> r.method(HttpMethod.POST)
                                 .and()
                                 .path("/auth/**")
                                 .uri("lb://realestate-auth"))
+
                 .route("realestate-user",
                         r -> r.method(HttpMethod.GET)
                                 .and()
                                 .path(("/individual-users/**"))
                                 .filters(f -> f.filter(filter)).uri("lb://realestate-user"))
+
                 .route("realestate-advert",
                         r -> r.method(HttpMethod.GET,HttpMethod.POST,HttpMethod.PUT,HttpMethod.DELETE)
                                 .and()
                                 .path("/adverts/**")
                                 .filters(f -> f.filter(filter)).uri("lb://realestate-advert"))
+
                 .route("realestate-purchase",
                         r -> r.method(HttpMethod.GET,HttpMethod.POST)
                                 .and()
                                 .path("/purchases/**")
                                 .filters(f -> f.filter(filter)).uri("lb://realestate-purchase"))
+
                 .route("realestate-payment",
                         r -> r.path("/payments/**")
                                 .filters(f -> f.filter(filter)).uri("lb://realestate-payment"))

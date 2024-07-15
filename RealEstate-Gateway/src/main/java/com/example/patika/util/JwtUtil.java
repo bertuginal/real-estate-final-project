@@ -26,14 +26,14 @@ public class JwtUtil {
 
 	public Claims getAllClaimsFromToken(String token) {
 
-		//// @formatter:off
+		// -- @formatter:off --
 		return Jwts
 				.parserBuilder()
 				.setSigningKey(key)			
 				.build()
 				.parseClaimsJws(token)
 				.getBody();
-			// @formatter:on
+		// -- @formatter:on --
 
 	}
 
