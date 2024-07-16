@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>RealEstate-Payment</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>EmlakBurada-Payment</name>
-    <description>EmlakBurada-Payment</description>
+    <name>RealEstate-Payment</name>
+    <description>RealEstate-Payment</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -31,6 +31,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
             <optional>true</optional>
         </dependency>
 
