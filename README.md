@@ -103,8 +103,7 @@ The real estate website project is designed to allow the user to create advertis
 
 ## 💱 API Structure
 
-### ↓ Postman API Documentation ↓
-[https://documenter.getpostman.com/view/27348572/2sA3e498aj](https://documenter.getpostman.com/view/27348572/2sA3e498aj)
+### ⟶ [Postman API Documentation](https://documenter.getpostman.com/view/27348572/2sA3e498aj) ⟵
 
 &nbsp; 
 
