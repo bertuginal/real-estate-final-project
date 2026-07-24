@@ -130,11 +130,9 @@ If you have a suggestion that would make this better, please fork the repo and c
 <!-- CONTACT -->
 ## ☎️ Contact
 
-📧 E-mail: [bertuginal@yahoo.com](mailto:bertuginal@yahoo.com)
+📧 **E-mail:** [bertuginal@yahoo.com](mailto:bertuginal@yahoo.com)
 
-📱 Mobile Phone: [(+90) 507 038 33 23](mailto:+905070383323)
-
-📋 Project Link: [https://github.com/bertuginal/real-estate-final-project](https://github.com/bertuginal/real-estate-final-project)
+ℹ️ **LinkedIn:** [in/bertuginal](https://www.linkedin.com/in/bertuginal/)
 
 
 
